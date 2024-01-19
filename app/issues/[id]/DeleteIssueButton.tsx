@@ -10,8 +10,11 @@ import {
   Button,
   Flex,
 } from "@radix-ui/themes";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
+  const router = useRouter();
   return (
     <AlertDialog.Root>
       <AlertDialogTrigger>
@@ -30,7 +33,16 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             </Button>
           </AlertDialogCancel>
           <AlertDialogAction>
-            <Button color="red">Delete Issue</Button>
+            <Button
+              color="red"
+              onClick={async () => {
+                await axios.delete("/api/issues/" + issueId);
+                router.push("/issues");
+                router.refresh(); //przeciwdziałamy cachingowi
+              }}
+            >
+              Delete Issue
+            </Button>
           </AlertDialogAction>
         </Flex>
       </AlertDialogContent>
