@@ -2,9 +2,24 @@ import prisma from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
 import { IssueStatusBadge, Link } from "@/app/components";
 import IssueActions from "./IssueActions";
+import { Status } from "@prisma/client";
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+const IssuesPage = async ({
+  searchParams,
+}: {
+  searchParams: { status: Status };
+}) => {
+  //walidacja: uzytkownik nie moze wpisac do url zlego statusu
+  const statuses = Object.values(Status); //wypisuje tylko mozliwe statusy w tablicy
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined; //jeśli przekazemy undefined do prisma, to nie uwzględni go w filtrowaniu
+
+  const issues = await prisma.issue.findMany({
+    where: {
+      status: status,
+    },
+  });
   return (
     <div>
       <IssueActions />
