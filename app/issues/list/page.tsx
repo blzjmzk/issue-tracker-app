@@ -5,11 +5,12 @@ import IssueActions from "./IssueActions";
 import { Issue, Status } from "@prisma/client";
 import NextLink from "next/link";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
+import Pagination from "@/app/components/Pagination";
 
 const IssuesPage = async ({
   searchParams,
 }: {
-  searchParams: { status: Status; orderBy: keyof Issue };
+  searchParams: { status: Status; orderBy: keyof Issue; page: string };
 }) => {
   const columns: { label: string; value: keyof Issue; className?: string }[] = [
     { label: "Issue", value: "title" },
@@ -32,12 +33,19 @@ const IssuesPage = async ({
     ? { [searchParams.orderBy]: "asc" }
     : undefined;
 
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 10;
+
   const issues = await prisma.issue.findMany({
     where: {
       status: status,
     },
     orderBy,
+    skip: (page - 1) * pageSize, //ile rekordów musimy skip aby wyswietlic tylko rekordy na dana strone
+    take: pageSize, //ile rekordów mamy fetchowac, ten i skip daje nam ilosc rekordow na dana strone
   });
+  const issueCount = await prisma.issue.count({ where: { status } }); //całkowita liczba bugów z danym statusem
+
   return (
     <div>
       <IssueActions />
@@ -82,6 +90,11 @@ const IssuesPage = async ({
           ))}
         </Table.Body>
       </Table.Root>
+      <Pagination
+        pageSize={pageSize}
+        currentPage={page}
+        itemCount={issueCount}
+      />
     </div>
   );
 };
