@@ -23,10 +23,20 @@ const IssuesPage = async ({
     ? searchParams.status
     : undefined; //jeśli przekazemy undefined do prisma, to nie uwzględni go w filtrowaniu
 
+  //walidacja
+  //mapujemy kolumny do tablicy stringów, poniewaz nie mozemy uzyc metody includes bezpośrednio
+  //za pomocą includes sprawdzamy, czy zawiera odpowiednie searchParams
+  const orderBy = columns
+    .map((column) => column.value)
+    .includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
   const issues = await prisma.issue.findMany({
     where: {
       status: status,
     },
+    orderBy,
   });
   return (
     <div>
