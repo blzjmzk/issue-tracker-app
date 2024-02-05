@@ -25,13 +25,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button
-            color="red"
-            disabled={isDeleting}
-            style={{
-              cursor: "pointer",
-            }}
-          >
+          <Button color="red" disabled={isDeleting}>
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
@@ -44,24 +38,12 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
           </AlertDialog.Description>
           <Flex mt="4" gap="3">
             <AlertDialog.Cancel>
-              <Button
-                variant="soft"
-                color="gray"
-                style={{
-                  cursor: "pointer",
-                }}
-              >
+              <Button variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button
-                style={{
-                  cursor: "pointer",
-                }}
-                color="red"
-                onClick={deleteIssue}
-              >
+              <Button color="red" onClick={deleteIssue}>
                 Delete Issue
               </Button>
             </AlertDialog.Action>
@@ -79,9 +61,6 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             value="soft"
             mt="2"
             onClick={() => setError(false)}
-            style={{
-              cursor: "pointer",
-            }}
           >
             OK
           </Button>
