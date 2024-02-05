@@ -23,3 +23,4 @@ A full-stack application for tracking bugs and assigning them to team members. T
 - Enhancing UI with displaying skeletons & spinners
 - Adding content in a markdown editor (EasyMDE)
 - Styling: Tailwind CSS, Radix UI (Themes)
+- Deployment: Vercel, Database: Supabase (PostgreSQL)
