@@ -6,7 +6,7 @@ test
 
 # Issue Tracking App
 
-A full-stack application for tracking bugs and assigning them to team members. The landing page includes a dashboard that displays recent bugs and statistics. Unauthorized users can add issues. Editing and deleting issues only available after login
+A full-stack application for tracking bugs and assigning them to team members. The landing page includes a dashboard that displays recent bugs and statistics. Adding, Editing and deleting issues only available after login
 
 ## Stack
 
