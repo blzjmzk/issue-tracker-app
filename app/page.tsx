@@ -3,6 +3,8 @@ import IssueSummary from "./IssueSummary";
 import IssueChart from "./IssueChart";
 import { Flex, Grid } from "@radix-ui/themes";
 import LatestIssues from "./LatestIssues";
+import bcrypt from "bcrypt";
+
 import { Metadata } from "next";
 
 export default async function Home({
@@ -15,6 +17,8 @@ export default async function Home({
     where: { status: "IN_PROGRESS" },
   });
   const closed = await prisma.issue.count({ where: { status: "CLOSED" } });
+  const hashedPassword = await bcrypt.hash("test", 10); //im wyzsza liczba bym wolniesza encrypcja ale bezpeczniejsza
+  console.log(hashedPassword);
 
   return (
     <Grid columns={{ initial: "1", md: "2" }} gap="5">
