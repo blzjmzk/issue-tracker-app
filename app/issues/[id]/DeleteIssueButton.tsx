@@ -1,16 +1,6 @@
 "use client";
 import { Spinner } from "@/app/components";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  Button,
-  Flex,
-} from "@radix-ui/themes";
+import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -34,7 +24,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   return (
     <>
       <AlertDialog.Root>
-        <AlertDialogTrigger>
+        <AlertDialog.Trigger>
           <Button
             color="red"
             disabled={isDeleting}
@@ -45,15 +35,15 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             Delete Issue
             {isDeleting && <Spinner />}
           </Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
-          <AlertDialogDescription>
+        </AlertDialog.Trigger>
+        <AlertDialog.Content>
+          <AlertDialog.Title>Confirm Deletion</AlertDialog.Title>
+          <AlertDialog.Description>
             Are you sure you want to delete this issue? This action cannot be
             undone.
-          </AlertDialogDescription>
+          </AlertDialog.Description>
           <Flex mt="4" gap="3">
-            <AlertDialogCancel>
+            <AlertDialog.Cancel>
               <Button
                 variant="soft"
                 color="gray"
@@ -63,8 +53,8 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
               >
                 Cancel
               </Button>
-            </AlertDialogCancel>
-            <AlertDialogAction>
+            </AlertDialog.Cancel>
+            <AlertDialog.Action>
               <Button
                 style={{
                   cursor: "pointer",
@@ -74,9 +64,9 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
               >
                 Delete Issue
               </Button>
-            </AlertDialogAction>
+            </AlertDialog.Action>
           </Flex>
-        </AlertDialogContent>
+        </AlertDialog.Content>
       </AlertDialog.Root>
       <AlertDialog.Root open={error}>
         <AlertDialog.Content>
