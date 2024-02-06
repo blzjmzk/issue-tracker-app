@@ -9,6 +9,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
   const router = useRouter();
   const [error, setError] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+
   const deleteIssue = async () => {
     try {
       setIsDeleting(true);
@@ -36,14 +37,14 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             Are you sure you want to delete this issue? This action cannot be
             undone.
           </AlertDialog.Description>
-          <Flex mt="4" gap="3">
+          <Flex mt="4" gap="3" justify="end">
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">
                 Cancel
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button color="red" onClick={deleteIssue}>
+              <Button variant="solid" color="red" onClick={deleteIssue}>
                 Delete Issue
               </Button>
             </AlertDialog.Action>
@@ -60,6 +61,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
             color="gray"
             value="soft"
             mt="2"
+            highContrast
             onClick={() => setError(false)}
           >
             OK
